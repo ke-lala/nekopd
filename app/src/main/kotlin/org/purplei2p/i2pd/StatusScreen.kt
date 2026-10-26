@@ -142,7 +142,7 @@ fun StatusScreen(
 fun AppHeader(modifier: Modifier = Modifier) {
     Card(modifier.fillMaxWidth()) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Image(painterResource(R.drawable.ic_logo), contentDescription = null, modifier = Modifier.size(72.dp))
+            Image(painterResource(R.drawable.logo_foreground), contentDescription = null, modifier = Modifier.size(72.dp))
             Column(Modifier.padding(start = 16.dp)) {
                 Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineSmall)
                 Text(stringResource(R.string.app_description), style = MaterialTheme.typography.bodyMedium)

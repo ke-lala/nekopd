@@ -3,4 +3,39 @@
     <string name="app_name" translatable="false">i2pd</string>
     <string name="app_description" translatable="false">Invisible Internet Protocol</string>
     <string name="app_description2">Network without borders</string>
+    <string name="console_choose_background">Background</string>
+    <string name="console_clear_background">Clear</string>
+    <string name="console_background_failed">Could not load this image.</string>
+    <string name="console_open_webapps">WebApps</string>
+    <string name="console_show_console">Console</string>
+    <string name="webapps_title">I2P WebApps</string>
+    <string name="webapps_intro">Open these I2P services in a browser selected in VPN settings. The pages are served by the existing I2P network services.</string>
+    <string name="webapps_mail">I2P Mail · mail.i2p</string>
+    <string name="webapps_irc">Web IRC · webirc.coldhell.i2p</string>
+    <string name="webapps_addressbook">Search local address book</string>
+    <string name="webapps_vpn_required">Start the i2pd VPN and select the browser you use before opening an I2P service.</string>
+    <string name="webapps_browser_not_selected">Select a browser that handles web links in VPN settings before opening this I2P service.</string>
+    <string name="webapps_browser_missing">No browser is available to open this I2P page.</string>
+    <string name="vpn_title">VPN mode</string>
+    <string name="vpn_summary">Route selected apps through the local i2pd SOCKS proxy</string>
+    <string name="vpn_status_running">VPN is running</string>
+    <string name="vpn_status_stopped">VPN is stopped</string>
+    <string name="vpn_scope_warning">All traffic from selected apps goes through i2pd. I2P sites can work; public Internet sites may fail closed unless you have configured an I2P outproxy. Android allows only one active VPN at a time.</string>
+    <string name="vpn_router_required">Start the i2pd router before connecting the VPN.</string>
+    <string name="vpn_start_router">Start i2pd</string>
+    <string name="vpn_router_not_running">The i2pd router is not running yet.</string>
+    <string name="vpn_select_app">Select at least one app first.</string>
+    <string name="vpn_permission_denied">Android VPN permission was not granted.</string>
+    <string name="vpn_selected_count">%1$d apps selected</string>
+    <string name="vpn_app_picker_title">Apps routed through i2pd</string>
+    <string name="vpn_no_apps">No launchable apps were found.</string>
+    <string name="vpn_start">Connect VPN</string>
+    <string name="vpn_stop">Disconnect VPN</string>
+    <string name="addressbook_title">Local address book</string>
+    <string name="addressbook_search_hint">Search .i2p name or destination</string>
+    <string name="addressbook_local_only">Searches locally cached entries only; uncached names are not resolved online here.</string>
+    <string name="addressbook_count">%1$d cached entries</string>
+    <string name="addressbook_empty">No matching cached entries.</string>
+    <string name="addressbook_copy">Copy destination</string>
+    <string name="addressbook_copied">Destination copied</string>
 </resources>

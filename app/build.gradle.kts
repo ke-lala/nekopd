@@ -109,6 +109,7 @@ dependencies {
     implementation(project(":service"))
     implementation(project(":config"))
     implementation(project(":native"))
+    implementation(files("../service/libs/hev-socks5-tunnel-2.19.3.aar"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

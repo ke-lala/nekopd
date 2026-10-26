@@ -45,4 +45,8 @@
     <string name="action_restart">Restart</string>
     <string name="action_cancel">Cancel</string>
     <string name="tile_label">I2P router</string>
+    <string name="channel_vpn">I2P VPN</string>
+    <string name="vpn_notification_title">i2pd VPN is running</string>
+    <string name="vpn_notification_text">Selected apps are routed through i2pd</string>
+    <string name="vpn_notification_stop">Stop</string>
 </resources>

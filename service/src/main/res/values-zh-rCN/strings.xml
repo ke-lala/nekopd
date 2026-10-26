@@ -37,4 +37,8 @@
     <string name="action_restart">重启</string>
     <string name="action_cancel">取消</string>
     <string name="tile_label">I2P 路由器</string>
+    <string name="channel_vpn">I2P VPN</string>
+    <string name="vpn_notification_title">i2pd VPN 正在运行</string>
+    <string name="vpn_notification_text">已选应用的流量正在经 i2pd 转发</string>
+    <string name="vpn_notification_stop">停止</string>
 </resources>

@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_description2">网络无国界</string>
+    <string name="console_choose_background">背景图片</string>
+    <string name="console_clear_background">清除</string>
+    <string name="console_background_failed">无法读取这张图片</string>
+    <string name="console_open_webapps">WebApps</string>
+    <string name="console_show_console">控制台</string>
+    <string name="webapps_title">I2P 网页应用</string>
+    <string name="webapps_intro">这些服务在已加入 VPN 的浏览器中打开，由现有 I2P 网络服务提供网页。</string>
+    <string name="webapps_mail">I2P 邮件 · mail.i2p</string>
+    <string name="webapps_irc">网页 IRC · webirc.coldhell.i2p</string>
+    <string name="webapps_addressbook">搜索本地地址簿</string>
+    <string name="webapps_vpn_required">打开 I2P 服务前，请先启动 i2pd VPN，并在 VPN 设置中选择你使用的浏览器。</string>
+    <string name="webapps_browser_not_selected">请在 VPN 设置中选中能打开网页的浏览器后再访问 I2P 服务。</string>
+    <string name="webapps_browser_missing">没有可用于打开 I2P 网页的浏览器。</string>
+    <string name="vpn_title">VPN 模式</string>
+    <string name="vpn_summary">将选定应用通过本机 i2pd SOCKS 代理转发</string>
+    <string name="vpn_status_running">VPN 正在运行</string>
+    <string name="vpn_status_stopped">VPN 已停止</string>
+    <string name="vpn_scope_warning">选定应用的全部流量都会经 i2pd 转发。I2P 网站可用；若未配置 I2P 出口代理，普通公网网站会被阻断而不会直连泄漏。Android 同时只能有一个活动 VPN。</string>
+    <string name="vpn_router_required">连接 VPN 前请先启动 i2pd 路由器。</string>
+    <string name="vpn_start_router">启动 i2pd</string>
+    <string name="vpn_router_not_running">i2pd 路由器尚未运行。</string>
+    <string name="vpn_select_app">请先至少选择一个应用。</string>
+    <string name="vpn_permission_denied">未获得 Android VPN 授权。</string>
+    <string name="vpn_selected_count">已选择 %1$d 个应用</string>
+    <string name="vpn_app_picker_title">经 i2pd 转发的应用</string>
+    <string name="vpn_no_apps">未找到可启动的应用。</string>
+    <string name="vpn_start">连接 VPN</string>
+    <string name="vpn_stop">断开 VPN</string>
+    <string name="addressbook_title">本地地址簿</string>
+    <string name="addressbook_search_hint">搜索 .i2p 名称或目的地</string>
+    <string name="addressbook_local_only">这里只搜索本机缓存；未缓存的名称不会在此联网解析。</string>
+    <string name="addressbook_count">缓存了 %1$d 条地址</string>
+    <string name="addressbook_empty">没有匹配的缓存地址。</string>
+    <string name="addressbook_copy">复制目的地</string>
+    <string name="addressbook_copied">已复制目的地</string>
 </resources>

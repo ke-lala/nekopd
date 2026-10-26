@@ -57,6 +57,7 @@ private enum class Tab(val label: Int, val icon: Int) {
 fun AppScaffold() {
     var tab by rememberSaveable { mutableStateOf(Tab.STATUS) }
     var webConsoleUrl by rememberSaveable { mutableStateOf<String?>(null) }
+    var addressBookSearch by rememberSaveable { mutableStateOf(false) }
     // Where the settings tab should open next, see SettingsTarget
     var settingsTarget by rememberSaveable { mutableStateOf<String?>(null) }
     val openSettings = { target: String ->
@@ -83,9 +84,19 @@ fun AppScaffold() {
         return
     }
 
+    if (addressBookSearch) {
+        BackHandler { addressBookSearch = false }
+        AddressBookSearchScreen(onBack = { addressBookSearch = false })
+        return
+    }
+
     webConsoleUrl?.let { url ->
         BackHandler { webConsoleUrl = null }
-        WebConsoleScreen(url = url, onBack = { webConsoleUrl = null })
+        WebConsoleScreen(
+            url = url,
+            onBack = { webConsoleUrl = null },
+            onOpenAddressBook = { addressBookSearch = true },
+        )
         return
     }
 

@@ -44,6 +44,7 @@ import org.purplei2p.i2pd.service.ThemeMode
 
 private enum class SettingsPage(val title: Int) {
     MAIN(R.string.tab_settings),
+    VPN(R.string.vpn_title),
     ROUTER_BASIC(R.string.router_basic),
     ROUTER_ADVANCED(R.string.router_advanced),
     ROUTER_RAW(R.string.router_raw),
@@ -98,6 +99,7 @@ fun SettingsScreen(checks: SystemChecks, target: String?, onTargetOpened: () -> 
             SettingsPage.STORAGE -> StorageScreen()
             SettingsPage.FILES -> FilesScreen()
             SettingsPage.LICENSES -> LicensesScreen()
+            SettingsPage.VPN -> VpnSettingsScreen()
             SettingsPage.MAIN -> Unit
         }
     }
@@ -118,6 +120,7 @@ private fun SettingsMain(checks: SystemChecks, onOpen: (SettingsPage) -> Unit, m
         TextRow(stringResource(R.string.router_basic), stringResource(R.string.router_basic_summary)) { onOpen(SettingsPage.ROUTER_BASIC) }
         TextRow(stringResource(R.string.router_advanced), stringResource(R.string.router_advanced_summary)) { onOpen(SettingsPage.ROUTER_ADVANCED) }
         TextRow(stringResource(R.string.router_raw), stringResource(R.string.router_raw_summary)) { onOpen(SettingsPage.ROUTER_RAW) }
+        TextRow(stringResource(R.string.vpn_title), stringResource(R.string.vpn_summary)) { onOpen(SettingsPage.VPN) }
 
         Section(R.string.settings_section_data)
         TextRow(stringResource(R.string.data_storage), stringResource(R.string.data_storage_summary)) { onOpen(SettingsPage.STORAGE) }
