@@ -52,13 +52,19 @@ private const val MAX_BACKGROUND_EDGE = 1920
 /** i2pd web console. Navigation outside loopback is blocked. */
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun WebConsoleScreen(url: String, onBack: () -> Unit, onOpenAddressBook: () -> Unit = {}) {
+fun WebConsoleScreen(
+    url: String,
+    onBack: () -> Unit,
+    onOpenAddressBook: () -> Unit = {},
+    onOpenBrowser: (String) -> Unit = {},
+) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var backgroundDataUri by remember { mutableStateOf<String?>(null) }
     var showWebApps by remember { mutableStateOf(false) }
     val currentBackground by rememberUpdatedState(backgroundDataUri)
     val currentOnOpenAddressBook by rememberUpdatedState(onOpenAddressBook)
+    val currentOnOpenBrowser by rememberUpdatedState(onOpenBrowser)
     val webView = remember { mutableStateOf<WebView?>(null) }
 
     LaunchedEffect(Unit) {
@@ -139,6 +145,15 @@ fun WebConsoleScreen(url: String, onBack: () -> Unit, onOpenAddressBook: () -> U
                                 if (target.host in LOOPBACK_HOSTS) return false
                                 if (target.scheme == "i2papp" && target.host == "addressbook") {
                                     currentOnOpenAddressBook()
+                                    return true
+                                }
+                                if (target.scheme == "i2papp" && target.host == "browser") {
+                                    val browserUrl = target.getQueryParameter("url")
+                                    if (browserUrl != null && normalizeI2pBrowserUrl(browserUrl) != null) {
+                                        currentOnOpenBrowser(browserUrl)
+                                    } else {
+                                        Toast.makeText(context, R.string.browser_invalid_address, Toast.LENGTH_SHORT).show()
+                                    }
                                     return true
                                 }
                                 if (target.host?.endsWith(".i2p", ignoreCase = true) == true && target.scheme in setOf("http", "https")) {

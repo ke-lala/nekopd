@@ -21,14 +21,14 @@
 <body>
   <main>
     <h1>I2P WebApps</h1>
-    <p>网页由已有的 I2P 服务提供；点选后会在手机浏览器中打开。</p>
-    <p class="notice">请先启动 i2pd VPN，并在 VPN 设置里选中将要使用的浏览器。VPN 会阻止未通过 i2pd 的普通公网连接；Android 同时只能启用一个 VPN。</p>
+  <p>网页由本机 i2pd 提供；点选 I2P 服务后会在应用内浏览器中打开。</p>
+  <p class="notice">请先启动 i2pd 路由器。内置浏览器仅允许访问 .i2p 地址，网页请求通过本机 HTTP 代理转发。</p>
     <section class="apps" aria-label="I2P applications">
-      <a href="http://mail.i2p/">
+      <a href="i2papp://browser?url=http%3A%2F%2Fmail.i2p%2F">
         <strong>I2P 邮件</strong>
         <small>mail.i2p</small>
       </a>
-      <a href="http://webirc.coldhell.i2p/">
+      <a href="i2papp://browser?url=http%3A%2F%2Fwebirc.coldhell.i2p%2F">
         <strong>网页 IRC</strong>
         <small>webirc.coldhell.i2p</small>
       </a>

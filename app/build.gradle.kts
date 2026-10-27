@@ -22,8 +22,8 @@ android {
         applicationId = "org.purplei2p.i2pd"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 3000000
-        versionName = "3.0.0"
+        versionCode = 3000001
+        versionName = "3.0.1"
     }
 
     splits {
@@ -115,6 +115,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.documentfile)
+    implementation(libs.androidx.webkit)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)

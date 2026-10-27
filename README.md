@@ -1,73 +1,71 @@
 # Neko-i2pd Android
 
-这是基于 [PurpleI2P/i2pd-android](https://github.com/PurpleI2P/i2pd-android) 3.0.0 的非官方 Android 分支。当前分支 `android-vpn-webapps` 增加了 Android VPN 分流设置和控制台 WebApps 门户，并保留 i2pd 原有功能。应用图标已替换为本分支定制图稿。
+[简体中文](README.md) · [English](README.en.md) · [Русский](README.ru.md)
 
-> 当前为实验性分支，不代表 PurpleI2P 官方发行版。源码可按仓库现有许可证及第三方组件许可证使用；Hev Socks5 Tunnel 的 MIT 许可证随项目提供。
+这是基于 [PurpleI2P/i2pd-android](https://github.com/PurpleI2P/i2pd-android) 3.0.0 的非官方 Android 分支，当前应用版本为 **3.0.1**。分支 `android-vpn-webapps` 增加地址簿导入/搜索、应用内 I2P 浏览器和按应用 VPN 分流，并保留 i2pd 原有控制台与隧道功能。它不是 PurpleI2P 官方发行版。
 
-## 功能
+## 项目预览
 
-- **按应用 VPN 分流**：在“设置 → VPN 模式”中选择需要通过 i2pd 的应用，启动后按 Android 系统提示授权。VPN 使用本机 i2pd SOCKS5（默认 `127.0.0.1:4447`）转发所选应用的 TCP/UDP 流量；i2pd 停止时会断开 VPN。数据面使用 Hev Socks5 Tunnel 2.19.3 的 API 23 原生构建，AAR 位于 `service/libs/`。
-- **WebApps 门户**：网页控制台提供 I2P Mail（`mail.i2p`）和网页 IRC（`webirc.coldhell.i2p`）入口。链接只会交给已在 VPN 分流列表中、且能处理网页链接的浏览器打开；未选中浏览器时会提示，不会直接外跳。
-- **本地地址簿查询**：搜索设备已缓存的 `.i2p` 主机名及 destination；不执行远端查询。
-- **控制台背景图**：可从手机照片中选择或清除网页控制台背景图。
-- **原有功能保留**：本分支不替换 i2pd 原有控制台或隧道功能。
+以下截图由项目使用者提供，展示地址簿、隧道配置、VPN 分流和路由器状态等界面。点击图片可查看原尺寸。
 
-## 功能边界与安全提示
+<a href="docs/screenshots/address-book-b32.jpg"><img src="docs/screenshots/address-book-b32.jpg" width="240" alt="地址簿搜索与 b32 地址"></a>
 
-- Android 同一时间通常只能启用一个 VPN；连接本应用 VPN 时，其他 VPN 可能需要先关闭。
-- VPN 仅路由用户选中的应用。被选中的应用访问普通公网地址时，只有在 i2pd 配置了可用 outproxy 等出口服务的情况下才可能连通；本分支不会在 VPN 故障时悄悄回退为手机直连。
-- Mail 和网页 IRC 是通过 I2P 网络访问的服务入口，不是此 APK 内置的邮件或 IRC 服务器；服务是否可用取决于 I2P 网络、地址簿和相应服务。
-- 当前没有新增独立的 BitTorrent 下载/做种 WebApp；i2pd 原有相关功能未被删除。
-- 最低 Android 版本为 API 23（Android 6.0）。构建已验证包含 `arm64-v8a`、`armeabi-v7a`、`x86`、`x86_64`；VPN 的实际路由效果仍需在目标手机上测试。
+**本地地址簿与 b32：**搜索 `.i2p` 域名、查看并复制其 b32 地址。
 
-## 使用步骤
+<a href="docs/screenshots/vpn-app-selection.jpg"><img src="docs/screenshots/vpn-app-selection.jpg" width="240" alt="VPN 模式与按应用分流"></a>
 
-1. 启动 i2pd 路由器并等待其运行。
-2. 打开“设置 → VPN 模式”，选中要访问 I2P 的浏览器或其他应用。
-3. 点“启动 VPN”，按 Android 系统提示确认 VPN 授权。
-4. 从网页控制台进入 **WebApps**；Mail/IRC 会在已选中的浏览器中打开。地址簿入口搜索本地缓存。
+**VPN 分流：**选择要经过 i2pd 的应用。
 
-## 构建
+<a href="docs/screenshots/router-status.jpg"><img src="docs/screenshots/router-status.jpg" width="240" alt="i2pd 路由器状态"></a>
 
-### 环境
+**路由器状态：**运行状态、网络与隧道统计。
 
-建议使用 JDK 21（上游构建说明要求 OpenJDK 17 或更高版本）、`make`、`cmake`、`perl`、`curl`、`zip`，以及 Android SDK。工程版本配置见 `gradle/libs.versions.toml`：compile SDK 37、最低 SDK 23、NDK `29.0.14206865`。安装相应 SDK 包，例如：
+<a href="docs/screenshots/tunnel-settings.jpg"><img src="docs/screenshots/tunnel-settings.jpg" width="240" alt="i2pd 隧道设置"></a>
 
-```bash
-sdkmanager "platforms;android-37" "build-tools;36.0.0" "ndk;29.0.14206865"
-```
+**隧道设置：**查看和管理现有隧道配置。
 
-### 获取源码并构建
+<a href="docs/screenshots/i2p-site-in-browser.jpg"><img src="docs/screenshots/i2p-site-in-browser.jpg" width="240" alt="在浏览器中访问 I2P 网站"></a>
 
-克隆时包含 i2pd 子模块：
+**I2P 网站：**用户提供的 `.i2p` 页面访问截图。
+
+## 已实现功能
+
+- **地址簿搜索与导入：**内置 71 条 Java I2P 发布版 [`hosts.txt`](https://github.com/i2p/i2p.i2p/blob/b21f0c5ee22edc4fb7fa0bc4bd8cca255e629ec0/installer/resources/hosts.txt) 快照记录，可搜索域名、查看/复制对应 b32 地址，并导入标准 `hosts.txt` 或 `hostname,b32` CSV。默认数据是固定快照，不会自动同步更新。导入采用新增合并，已有同名记录优先；运行中的路由器需重启后才会按新导入域名解析。
+- **应用内 I2P 浏览器：**通过本机 i2pd HTTP 代理 `127.0.0.1:4444` 访问 `.i2p` 页面，只允许 `.i2p` 主页面和站内资源；不支持代理覆盖的系统 WebView 会显示提示，不会退回公网直连。
+- **按应用 VPN：**在 VPN 设置中选择应用，使用 Hev Socks5 Tunnel 2.19.3（API 23 原生构建）把所选应用流量转向本机 i2pd SOCKS5 `127.0.0.1:4447`。Android 通常一次只能运行一个 VPN。若没有配置可用的 I2P outproxy，普通公网连接可能被阻断；VPN 故障时不会悄悄直连公网。
+- **WebApps 门户：**Mail（`mail.i2p`）和 Web IRC（`webirc.coldhell.i2p`）可从控制台在应用内浏览器打开。它们是 I2P 网络中的服务入口，不是 APK 内置的邮件或 IRC 服务器。
+- **控制台背景图：**可从手机照片选择或清除控制台背景。
+- **原有隧道和控制台：**保留 i2pd 原有功能；本分支尚未新增独立的 BitTorrent 下载/做种 WebApp。
+
+## Android 兼容性
+
+目标覆盖多数常见 Android 设备和模拟器：**Android 6.0/API 23 或更高版本**，包含 `arm64-v8a`、`armeabi-v7a`、`x86`、`x86_64` 四种 ABI。不能保证适用于所有厂商固件或设备组合；内置浏览器还取决于设备 WebView 对 `PROXY_OVERRIDE` 的支持情况。当前验证包括 APK 构建及单元测试，不等于在所有机型上的实机测试。
+
+## 下载
+
+从 [GitHub Releases](https://github.com/ke-lala/nekopd/releases) 获取 APK。3.0.1 安装包为 **debug 签名测试版**，可侧载测试；不是 Google Play 发布签名，也不应当作正式安全审计后的稳定发行版。
+
+## 从源码构建
+
+需要 JDK 17 或更高版本、Android SDK（API 37）、NDK `29.0.14206865`、`make`、`cmake`、`perl`、`curl` 和 `zip`。获取源码并初始化 i2pd 子模块：
 
 ```bash
 git clone --recurse-submodules --branch android-vpn-webapps \
-  https://github.com/ke-lala/Neko-i2pd.git
-cd Neko-i2pd
-```
-
-设置 SDK 环境变量，并先构建 i2pd 原生依赖：
-
-```bash
+  https://github.com/ke-lala/nekopd.git
+cd nekopd
 export ANDROID_HOME="$HOME/Android/Sdk"
 export ANDROID_SDK_ROOT="$ANDROID_HOME"
 export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/29.0.14206865"
 binary/jni/build.sh
-```
-
-然后构建通用调试 APK：
-
-```bash
 ./gradlew :app:assembleDebug
 ```
 
-APK 输出在 `app/build/outputs/apk/debug/`。调试 APK 可用于侧载测试。正式发行请使用自己的签名密钥构建 release 包；不要把密钥、密码或 `keystore.properties` 提交到仓库。
+通用调试 APK 输出在 `app/build/outputs/apk/debug/`。正式发布请使用自己的签名密钥；不要把密钥、密码或 `keystore.properties` 提交到仓库。
 
-### 修改 VPN 转发引擎
+## AI 使用说明
 
-APK 工程内附的是 Hev Socks5 Tunnel 2.19.3、API 23 目标的 AAR 和 MIT 许可证。若要修改其 C 原生实现，请从 [Hev Socks5 Tunnel 上游](https://github.com/heiher/hev-socks5-tunnel/tree/2.19.3) 获取对应源码及子模块，重新编译 AAR 后替换 `service/libs/hev-socks5-tunnel-2.19.3.aar`。
+本分支的代码实现、README 编写和翻译使用了 AI 辅助。AI 辅助不等于安全审计，也不代表已在所有安卓设备上完成测试；兼容性说明仅限上述 API/ABI 目标和已执行的构建/测试。
 
-## 上游致谢
+## 上游与许可证
 
-本项目基于 [PurpleI2P/i2pd-android](https://github.com/PurpleI2P/i2pd-android) 与 [PurpleI2P/i2pd](https://github.com/PurpleI2P/i2pd)，VPN 数据面使用 [Hev Socks5 Tunnel](https://github.com/heiher/hev-socks5-tunnel)。请查阅各自源码与许可证文件。
+本项目基于 [PurpleI2P/i2pd-android](https://github.com/PurpleI2P/i2pd-android) 和 [PurpleI2P/i2pd](https://github.com/PurpleI2P/i2pd)。VPN 数据面使用 [Hev Socks5 Tunnel](https://github.com/heiher/hev-socks5-tunnel)，其 MIT 许可证随项目提供。请同时查阅各上游项目及依赖的许可证文件。

@@ -58,6 +58,7 @@ fun AppScaffold() {
     var tab by rememberSaveable { mutableStateOf(Tab.STATUS) }
     var webConsoleUrl by rememberSaveable { mutableStateOf<String?>(null) }
     var addressBookSearch by rememberSaveable { mutableStateOf(false) }
+    var inAppBrowserUrl by rememberSaveable { mutableStateOf<String?>(null) }
     // Where the settings tab should open next, see SettingsTarget
     var settingsTarget by rememberSaveable { mutableStateOf<String?>(null) }
     val openSettings = { target: String ->
@@ -84,9 +85,17 @@ fun AppScaffold() {
         return
     }
 
+    if (inAppBrowserUrl != null) {
+        I2pBrowserScreen(initialUrl = inAppBrowserUrl.orEmpty(), onBack = { inAppBrowserUrl = null })
+        return
+    }
+
     if (addressBookSearch) {
         BackHandler { addressBookSearch = false }
-        AddressBookSearchScreen(onBack = { addressBookSearch = false })
+        AddressBookSearchScreen(
+            onBack = { addressBookSearch = false },
+            onOpenBrowser = { inAppBrowserUrl = it },
+        )
         return
     }
 
@@ -96,6 +105,7 @@ fun AppScaffold() {
             url = url,
             onBack = { webConsoleUrl = null },
             onOpenAddressBook = { addressBookSearch = true },
+            onOpenBrowser = { inAppBrowserUrl = it },
         )
         return
     }
